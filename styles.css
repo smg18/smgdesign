@@ -1,0 +1,342 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap');
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: #FFD800; /* accent */
+  color: #0a0a0a;      /* neutral-950 */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ==========================================================================
+   Article content — generic tag styling.
+   This targets bare HTML tags (not utility classes) because article bodies
+   will eventually be rendered from markdown, which produces plain <h2>,
+   <p>, <ul>, <blockquote>, <img> etc. with no classes attached. Scoped to
+   .article-content so it never leaks into the rest of the site.
+   ========================================================================== */
+
+.article-content {
+  font-size: 1.125rem;
+  line-height: 1.75;
+  color: #d4d4d4; /* neutral-300 */
+  padding-top: 0 !important; /* the gap above is always owned by whatever precedes this block — header padding, a featured image's margin, or a callout's own margin — so this must stay zero regardless of what's present or removed */
+}
+
+.article-content > *:first-child {
+  margin-top: 0;
+}
+
+.article-content p {
+  margin: 0 0 1.5rem;
+}
+
+.article-content h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: #f5f5f5; /* neutral-100 */
+  margin: 3rem 0 1.25rem;
+}
+
+.article-content h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #f5f5f5;
+  margin: 2.25rem 0 1rem;
+}
+
+.article-content h4 {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  color: #f5f5f5;
+  margin: 1.75rem 0 0.75rem;
+}
+
+.article-content strong {
+  color: #f5f5f5;
+  font-weight: 600;
+}
+
+.article-content em {
+  font-style: italic;
+}
+
+.article-content a {
+  color: #f5f5f5;
+  border-bottom: 1px solid #404040; /* neutral-700 */
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.article-content a:hover {
+  color: #FFD800;
+  border-color: #FFD800;
+}
+
+.article-content ul,
+.article-content ol {
+  margin: 0 0 1.5rem;
+  padding-left: 1.25rem;
+}
+
+.article-content ul {
+  list-style: disc;
+}
+
+.article-content ol {
+  list-style: decimal;
+}
+
+.article-content li {
+  margin-bottom: 0.5rem;
+}
+
+.article-content li::marker {
+  color: #d4d4d4; /* neutral-300 — same as body text, not the accent */
+}
+
+/* Secondary-level (nested) lists — distinct marker so the hierarchy reads clearly */
+
+.article-content li > ul,
+.article-content li > ol {
+  margin: 0.5rem 0 0;
+}
+
+.article-content li > ul {
+  list-style: circle;
+}
+
+.article-content li > ol {
+  list-style: lower-alpha;
+}
+
+.article-content li > ul > li::marker,
+.article-content li > ol > li::marker {
+  color: #737373; /* neutral-500 — subdued, so the top level still reads as primary */
+}
+
+.article-content blockquote {
+  border-left: 4px solid #FFD800;
+  padding-left: 1.25rem;
+  margin: 2.25rem 0;
+}
+
+.article-content blockquote p {
+  font-size: 1.25rem;
+  color: #f5f5f5;
+  line-height: 1.4;
+  margin-bottom: 0;
+}
+
+.article-content blockquote cite {
+  display: block;
+  font-size: 0.875rem;
+  font-style: normal;
+  color: #737373; /* neutral-500 */
+  margin-top: 0.75rem;
+}
+
+.article-content img {
+  display: block;
+  width: 100%;
+  border: 1px solid #262626; /* neutral-800 */
+  background: #171717; /* neutral-900 */
+  margin: 2.25rem 0 0.5rem;
+  cursor: zoom-in;
+  transition: opacity 0.15s ease;
+}
+
+.article-content img:hover {
+  opacity: 0.9;
+}
+
+.article-content figcaption {
+  font-size: 0.8125rem;
+  color: #737373;
+  text-align: center;
+  margin: 0 0 2.25rem;
+}
+
+/* Optional 2-up image grid — dropped into article markdown as raw HTML when needed */
+
+.article-content .image-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: 2.25rem 0;
+}
+
+@media (max-width: 640px) {
+  .article-content .image-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.article-content .image-grid figure {
+  margin: 0;
+}
+
+.article-content .image-grid img {
+  display: block;
+  width: 100%;
+  margin: 0;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  cursor: zoom-in;
+}
+
+.article-content .image-grid figcaption {
+  margin: 0.5rem 0 0;
+}
+
+/* Horizontal scroll gallery — Read.cv style. The first image is slightly
+   narrower than the column so the next one visibly peeks in from the right
+   at rest. Center-snap means that once scrolled to any other image, its
+   neighbors on both sides stay partially visible rather than being clipped
+   away — the bleed is continuous in both directions as you scroll. */
+
+.article-content .scroll-gallery {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  width: 100vw;
+  /* margin-left/right: calc(50% - 50vw) is the correct way to break a
+     nested element out to full viewport width — it cancels out however
+     far the parent itself is inset from the viewport edge, regardless of
+     nesting depth. The earlier attempt used position:relative + left:50%
+     + transform, but left:50% resolves against the *immediate parent's*
+     width (the narrow 700px column), not the viewport, so it was
+     centering against the wrong reference frame entirely. */
+  margin-top: 3rem;
+  margin-bottom: 3.5rem;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  /* The text column is max-w-[700px] with its own px-6 (1.5rem) inner
+     padding, so the actual text edge sits (100vw - 700px)/2 + 1.5rem from
+     the screen edge — not just (100vw - 700px)/2, which only reaches the
+     700px box's outer edge, one px-6 short of where body copy actually
+     starts. The max(1.5rem, ...) floor covers the case where the column
+     IS the viewport (narrow screens), where px-6 alone determines the
+     inset. Right side matches so the natural scroll-end lands the last
+     image flush with the column's right edge, mirroring the start. */
+  padding-left: max(1.5rem, calc((100vw - 700px) / 2 + 1.5rem));
+  padding-right: max(1.5rem, calc((100vw - 700px) / 2 + 1.5rem));
+  /* scroll-snap-type does NOT respect a scroll container's own padding by
+     default — scroll-padding is a separate property that defaults to 0
+     regardless of padding. Without it matching here, mandatory snap
+     auto-scrolls past the left padding on load to satisfy the snap
+     constraint, silently cancelling out the alignment above. Verified
+     against a real Chromium render — this was the actual bug. */
+  scroll-padding-left: max(1.5rem, calc((100vw - 700px) / 2 + 1.5rem));
+  scroll-padding-right: max(1.5rem, calc((100vw - 700px) / 2 + 1.5rem));
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+  scrollbar-color: #404040 transparent;
+}
+
+.article-content .scroll-gallery::-webkit-scrollbar {
+  height: 6px;
+}
+
+.article-content .scroll-gallery::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.article-content .scroll-gallery::-webkit-scrollbar-thumb {
+  background: #404040;
+  border-radius: 3px;
+}
+
+.article-content .scroll-gallery figure {
+  flex: 0 0 auto;
+  width: min(560px, calc(100vw - 6rem));
+  margin: 0;
+  scroll-snap-align: start;
+}
+
+.article-content .scroll-gallery img {
+  display: block;
+  width: 100%;
+  margin: 0;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.article-content .scroll-gallery figcaption {
+  margin: 0.5rem 0 0;
+}
+
+/* Featured/cover image — wider than the text column, zoomable like body images */
+
+.featured-image img {
+  cursor: zoom-in;
+  transition: opacity 0.15s ease;
+}
+
+.featured-image img:hover {
+  opacity: 0.9;
+}
+
+/* Lightbox */
+
+#lightbox img {
+  cursor: zoom-out;
+}
+
+/* ==========================================================================
+   Callout — reusable notice component (info, warning, etc.)
+   Icon on the left, text on the right. Works standalone in hand-built page
+   chrome (like the gap between a featured image and the article body) or
+   dropped as raw HTML inside .article-content markdown.
+   ========================================================================== */
+
+.callout {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  border: 1px solid #262626; /* neutral-800 */
+  background: #171717; /* neutral-900 */
+  padding: 1rem 1.25rem;
+  margin: 3rem 0;
+}
+
+.callout-icon {
+  width: 1.125rem;
+  height: 1.125rem;
+  flex-shrink: 0;
+  margin-top: 0.125rem;
+}
+
+.callout p {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: #a3a3a3; /* neutral-400 */
+  margin: 0;
+}
+
+/* Info: subtle neutral icon, not the accent color */
+.callout-info .callout-icon {
+  color: #737373; /* neutral-500 */
+}
+
+/* Warning: muted amber, still restrained — distinct from the accent yellow */
+.callout-warning .callout-icon {
+  color: #b45309;
+}

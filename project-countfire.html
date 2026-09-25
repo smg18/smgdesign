@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SGGXNHR2MG"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SGGXNHR2MG');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Transforming Takeoff into an End-to-End Estimating Platform — Simon Mauro Guido</title>
+<meta name="description" content="How we rebuilt Countfire's estimating flow around a single connected job — instead of five disconnected tools stitched together with spreadsheets.">
+<link rel="canonical" href="https://smg.design/project-countfire.html">
+<link rel="icon" href="images/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Simon Mauro Guido">
+<meta property="og:title" content="Transforming Takeoff into an End-to-End Estimating Platform — Simon Mauro Guido">
+<meta property="og:description" content="How we rebuilt Countfire's estimating flow around a single connected job — instead of five disconnected tools stitched together with spreadsheets.">
+<meta property="og:url" content="https://smg.design/project-countfire.html">
+<meta property="og:image" content="https://smg.design/images/opengraph.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Transforming Takeoff into an End-to-End Estimating Platform — Simon Mauro Guido">
+<meta name="twitter:description" content="How we rebuilt Countfire's estimating flow around a single connected job — instead of five disconnected tools stitched together with spreadsheets.">
+<meta name="twitter:image" content="https://smg.design/images/opengraph.png">
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-neutral-950 text-neutral-100">
+
+  <!-- Sticky back button -->
+  <a href="index.html" aria-label="Back to Simon Mauro Guido" class="fixed top-5 left-5 sm:top-6 sm:left-6 z-50 flex items-center justify-center w-10 h-10 rounded-[3px] bg-neutral-900/80 backdrop-blur border border-neutral-800 text-neutral-300 hover:text-[#FFD800] hover:border-neutral-700 transition-colors">
+    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19 5 12l7-7"/></svg>
+  </a>
+
+  <main>
+
+    <!-- Header: title, dek, meta bar (no byline — that's moved to the bottom) -->
+    <div class="max-w-[700px] mx-auto px-6">
+      <header class="pt-20 sm:pt-24 mb-12">
+        <h1 class="text-[32px] sm:text-[40px] font-semibold tracking-tight leading-[1.15] mb-5">Transforming Takeoff into an End-to-End Estimating Platform</h1>
+        <p class="text-lg text-neutral-400 leading-relaxed mb-6">How we rebuilt Countfire's estimating flow around a single connected job — instead of five disconnected tools stitched together with spreadsheets.</p>
+        <div class="flex flex-wrap items-center gap-x-3.5 gap-y-1 text-sm text-neutral-400 border-y border-neutral-800 py-3">
+          <span>Project</span>
+          <span class="text-neutral-700 text-base leading-none">•</span>
+          <span>Countfire</span>
+          <span class="text-neutral-700 text-base leading-none">•</span>
+          <span>2022</span>
+          <span class="text-neutral-700 text-base leading-none">•</span>
+          <span>5 min read</span>
+        </div>
+      </header>
+    </div>
+
+    <!-- Featured image — optional, wider than the text column, usually the first image on the page -->
+    <div class="max-w-[900px] mx-auto px-6 mb-12">
+      <div class="featured-image aspect-[4/3] overflow-hidden bg-neutral-900 border border-neutral-800">
+        <img src="images/project-countfire-thumb.png" alt="Countfire estimating flow overview" loading="lazy" class="w-full h-full object-cover">
+      </div>
+    </div>
+
+    <!-- Article body -->
+    <div class="max-w-[700px] mx-auto px-6">
+      <div class="article-content pb-4">
+
+        <p>Countfire is a self-funded SaaS startup based in London, offering an industry-leading takeoff platform. Using SVG image recognition and intelligent automation, Countfire allows electrical estimators to count symbols across multiple technical building plans in seconds—drastically reducing manual effort and increasing accuracy.</p>
+
+        <h2>My Role</h2>
+
+        <p>As the Lead Product Designer, I was responsible for UX/UI design, wireframing, and prototyping in Figma. The platform was built in React and TailwindCSS, and I worked closely with ex-estimators, engineers, and stakeholders to enhance the product’s functionality and usability.</p>
+
+        <img src="images/project-countfire-team.jpg" alt="The Countfire team" loading="lazy">
+        <figcaption>The Countfire team</figcaption>
+
+        <h2>Starting with the job, not the tools</h2>
+
+        <p>We spent the first few weeks doing discovery with estimators rather than looking at the existing product. The goal was to understand a job as they experienced it — not as our tool had chopped it into. A few things came up consistently:</p>
+
+        <ul>
+          <li>Estimators didn't think in terms of "takeoff" and "pricing" as separate tasks — to them it was <strong>one job</strong>, done in one sitting.</li>
+          <li>Re-entering the same measurements into a second tool was the single biggest source of quiet, hard-to-catch errors.</li>
+          <li>Confidence in a final number mattered as much as the number itself — estimators wanted to trace it back to its source.</li>
+        </ul>
+
+        <h3>Early signals</h3>
+
+        <p>Some of this had already surfaced in support tickets and churn conversations, but seeing it play out over a shoulder during a real takeoff made it concrete in a way a <a href="https://uxdesign.cc" target="_blank" rel="noopener">support ticket</a> never quite does.</p>
+
+        <blockquote>
+          <p>I don't think about takeoff and pricing as different tasks. I think about the job. The software should too.</p>
+          <cite>— An estimator interviewed during discovery</cite>
+        </blockquote>
+
+        <p>That reframing — a job, not a sequence of disconnected tasks — became the spine of the redesign. Every screen we shipped after that had to answer one question: does this keep the estimator inside their job, or does it send them somewhere else to find what they need?</p>
+
+        <img src="images/project-countfire-01.jpg" alt="Early wireframes of the unified job view" loading="lazy">
+        <figcaption>Early wireframes exploring a single connected view of a job.</figcaption>
+
+        <h2>Designing the connected view</h2>
+
+        <p>The resulting interface kept takeoff, pricing, and materials visible in the same view, updating in real time as the estimator worked. A change on the drawing updated the price instantly. A change in pricing flagged which parts of the takeoff it touched. Nothing needed re-entering, and nothing needed a tab switch to confirm.</p>
+
+        <p>We were careful not to just merge three screens into one cluttered one. A lot of the actual design work was about sequencing — deciding what an estimator needed to see first, what could stay collapsed until relevant, and where a single number needed to be traceable back to its source without extra clicks.</p>
+
+        <div class="image-grid">
+          <figure>
+            <img src="images/project-countfire-02.jpg" alt="Takeoff and pricing shown together" loading="lazy">
+            <figcaption>Takeoff and pricing shown together</figcaption>
+          </figure>
+          <figure>
+            <img src="images/project-countfire-03.jpg" alt="Materials list synced to takeoff changes" loading="lazy">
+            <figcaption>Materials list synced to takeoff changes</figcaption>
+          </figure>
+        </div>
+
+        <h2>What changed</h2>
+
+        <p>Estimators stopped rebuilding the same numbers in a second tool just to double-check them. Fewer jobs went out the door with a price nobody was fully confident in. And, just as importantly, the product finally matched how the job was actually done in people's heads — as one thing, not five.</p>
+
+      </div>
+
+      <!-- Author / return-home block -->
+      <a href="index.html" class="group flex items-center gap-4 border-t border-neutral-800 pt-10 mt-2 mb-16">
+        <img src="images/smg-profile.jpeg" alt="Simon Mauro Guido" class="w-12 h-12 rounded-full object-cover bg-neutral-900 shrink-0">
+        <div class="flex-1 min-w-0">
+          <div class="font-medium group-hover:text-[#FFD800] transition-colors">Simon Mauro Guido</div>
+          <div class="text-sm text-neutral-500">Lead Product Designer</div>
+        </div>
+      </a>
+
+      <!-- Footer -->
+      <footer class="border-t border-neutral-800 pt-8 pb-14">
+        <div class="flex flex-wrap items-center justify-between gap-4">
+          <span class="text-sm text-neutral-500">© MMXXVI Simon Mauro Guido</span>
+          <div class="flex gap-4 text-sm text-neutral-400">
+            <a href="https://medium.com/@smgdesign" target="_blank" rel="noopener" class="hover:text-[#FFD800] transition-colors">Medium</a>
+            <a href="https://vimeo.com/smgdesign" target="_blank" rel="noopener" class="hover:text-[#FFD800] transition-colors">Vimeo</a>
+            <a href="https://www.linkedin.com/in/simonmauroguido" target="_blank" rel="noopener" class="hover:text-[#FFD800] transition-colors">LinkedIn</a>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+  </main>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/90 p-6 sm:p-10">
+    <img id="lightbox-img" src="" alt="" class="max-w-full max-h-full object-contain">
+  </div>
+
+  <script src="article.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SGGXNHR2MG"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SGGXNHR2MG');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Transforming Passive Live Streams into Interactive Experiences — Simon Mauro Guido</title>
+<meta name="description" content="A case study on bringing Glisser's interactive presentation tools (live polling, Q&A) to remote streaming audiences.">
+<link rel="canonical" href="https://smg.design/project-glisserlive.html">
+<link rel="icon" href="images/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Simon Mauro Guido">
+<meta property="og:title" content="Transforming Passive Live Streams into Interactive Experiences — Simon Mauro Guido">
+<meta property="og:description" content="A case study on bringing Glisser's interactive presentation tools (live polling, Q&A) to remote streaming audiences.">
+<meta property="og:url" content="https://smg.design/project-glisserlive.html">
+<meta property="og:image" content="https://smg.design/images/opengraph.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Transforming Passive Live Streams into Interactive Experiences — Simon Mauro Guido">
+<meta name="twitter:description" content="A case study on bringing Glisser's interactive presentation tools (live polling, Q&A) to remote streaming audiences.">
+<meta name="twitter:image" content="https://smg.design/images/opengraph.png">
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-neutral-950 text-neutral-100">
+
+  <!-- Sticky back button -->
+  <a href="index.html" aria-label="Back to Simon Mauro Guido" class="fixed top-5 left-5 sm:top-6 sm:left-6 z-50 flex items-center justify-center w-10 h-10 rounded-[3px] bg-neutral-900/80 backdrop-blur border border-neutral-800 text-neutral-300 hover:text-[#FFD800] hover:border-neutral-700 transition-colors">
+    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19 5 12l7-7"/></svg>
+  </a>
+
+  <main>
+
+    <!-- Header: title, dek, meta bar (no byline — that's moved to the bottom) -->
+    <div class="max-w-[700px] mx-auto px-6">
+      <header class="pt-20 sm:pt-24 mb-12">
+        <h1 class="text-[32px] sm:text-[40px] font-semibold tracking-tight leading-[1.15] mb-5">Transforming Passive Live Streams into Interactive Experiences</h1>
+        <p class="text-lg text-neutral-400 leading-relaxed mb-6">xxxx</p>
+        <div class="flex flex-wrap items-center gap-x-3.5 gap-y-1 text-sm text-neutral-400 border-y border-neutral-800 py-3">
+          <span>Project</span>
+          <span class="text-neutral-700 text-base leading-none">•</span>
+          <span>Glisser LIVE</span>
+          <span class="text-neutral-700 text-base leading-none">•</span>
+          <span>2018</span>
+          <span class="text-neutral-700 text-base leading-none">•</span>
+          <span>5 min read</span>
+        </div>
+      </header>
+    </div>
+
+    <!-- Featured image — optional, wider than the text column, usually the first image on the page -->
+    <div class="max-w-[900px] mx-auto px-6 mb-12">
+      <div class="featured-image aspect-[4/3] overflow-hidden bg-neutral-900 border border-neutral-800">
+        <img src="images/project-glisserlive-thumb.png" alt="Glisser LIVE audience view" loading="lazy" class="w-full h-full object-cover">
+      </div>
+    </div>
+
+    <!-- Article body -->
+    <div class="max-w-[700px] mx-auto px-6">
+
+      <div class="callout callout-info">
+        <svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+        <p>This project is from 2018, and there's plenty I'd approach differently today — some of the interface decisions and technical choices show their age. I've kept it up because it reflects a way of working I still stand by: getting genuinely close to a problem (in this case, months spent embedded with AV teams at live events) and testing prototypes in real conditions rather than just in a lab.</p>
+      </div>
+
+      <div class="article-content pb-4">
+
+        <h2>The Problem: A One-Way Conversation</h2>
+
+        <p>It’s an all-too-common scenario. You’re excited about a conference but can’t attend in person, so you tune in to the live stream—only to feel like a fly on the wall. There’s no way to engage, no direct connection with the presenter, and certainly no way to influence the conversation.</p>
+
+        <p>At the time, Glisser was already making in-person presentations more interactive through live polling, audience Q&A, and slide sharing. But when events went online, that interactivity was lost. Viewers became spectators rather than participants.</p>
+
+        <p>My challenge was clear: How could we extend Glisser’s interactive experience to remote audiences, making them feel just as present and engaged as those in the room?</p>
+
+        <h2>The Process: Understanding the Live Streaming Ecosystem</h2>
+
+        <p>Before diving into solutions, I needed to understand the real-world challenges of live streaming—not just from a design perspective but from a technical and logistical standpoint.</p>
+
+        <p>For nine months, I attended live-streamed events across London, embedding myself with AV teams to observe how live streaming worked behind the scenes. I asked questions, took notes, and identified common pain points. Then, to gain hands-on experience, I purchased streaming equipment and started broadcasting small events myself, testing different setups and troubleshooting issues as they arose.</p>
+
+        <img src="images/project-glisserlive-camera.png" alt="Filming a live event in London, 2018" loading="lazy">
+        <figcaption>Filming a live event in London, 2018</figcaption>
+
+        <p>I also researched existing platforms like YouTube Live, Facebook Live, and Vimeo. These platforms had nailed certain aspects of streaming—intuitive layouts, reliable video delivery—but the interactive experience was lacking. Comments were often chaotic and disconnected from the presentation. What was missing was a way for remote attendees to engage in a structured, meaningful way, just as they would in a physical event.</p>
+
+        <h2>The Solution: Bringing Remote Audiences Into the Conversation</h2>
+
+        <p>The key insight from my research was that people were already familiar with certain live streaming layouts, and deviating too much would create friction. Instead of reinventing the wheel, I focused on enhancing what was familiar by embedding Glisser’s interactive features within a standard streaming interface.</p>
+
+        <ul>
+          <li>Interactive Q&A: Instead of a generic comment section, remote attendees could submit questions directly to the presenter, just like in a live event.</li>
+          <li>Time-Sensitive Polling: Polls would overlay the stream at key moments, prompting immediate responses without disrupting the viewing experience.</li>
+          <li>Personalised Branding: Each event’s landing page would automatically adapt to its organiser’s branding, using Glisser’s API to pull in logos, colours, and presentation assets.</li>
+        </ul>
+
+        <p>I designed the prototype in Adobe XD, ensuring a seamless and intuitive experience. The proof of concept was built on WordPress using Materialize CSS, with each presentation functioning as a custom post type that dynamically pulled in streaming links and Glisser’s interactive elements.</p>
+
+        <img src="images/project-glisserlive-notes.png" alt="Early wireframes of the unified job view" loading="lazy">
+        <figcaption>xxxx</figcaption>
+
+        <h2>The Real Test: Live Event Trials</h2>
+
+        <p>While the proof of concept was never intended for public release, it was so effortless to use in testing that we decided to trial it at live events in London. This was where real-world conditions pushed the design to its limits.</p>
+
+        <p>One critical issue surfaced immediately: attendees who joined early wouldn’t see last-minute changes made by presenters. Refreshing the page would cause them to lose their notes and previous interactions. After rapid on-site testing, I proposed a solution: a ‘coming soon’ holding screen that remained in place until the presentation officially started. This allowed presenters to make final updates while ensuring attendees wouldn’t lose their work.</p>
+
+        <p>The trial runs were a success, proving that we had created something both powerful and intuitive.</p>
+
+        <img src="images/project-glisserlive-camera.png" alt="Filming a live event in London, 2018" loading="lazy">
+        <figcaption>Filming a live event in London, 2018</figcaption>
+
+        <h2>The Impact: A Game-Changer for Glisser</h2>
+
+        <p>Glisser LIVE quickly gained traction, landing Glisser’s largest-ever deal and expanding its reach to high-profile events, including TEDx talks. Event industry media recognised it as a breakthrough in audience engagement, and in November 2018, Glisser LIVE won ‘Best Hybrid Event Live Streaming Solution’ at the Event Tech Awards.</p>
+
+        <p>Then came 2020. When the COVID-19 pandemic forced almost all live events to move online, Glisser LIVE became the backbone of Glisser’s business. The company pivoted entirely to virtual and hybrid events, even developing its own proprietary streaming solution—eliminating reliance on YouTube and Vimeo. In 2021, Glisser LIVE won ‘Best Virtual & Hybrid Event Platform’ from the Virtual Events Institute.</p>
+
+        <p>What started as an experiment had become a defining product for the company.</p>
+
+        <h2>What started as an experiment had become a defining product for the company.</h2>
+
+        <p>Looking back, one challenge that remained was balancing flexibility with ease of use. While event organisers loved having customisation options, too many settings risked overwhelming them. If I were to iterate on this project today, I’d focus on streamlining the onboarding process—perhaps using AI-driven recommendations to simplify setup.</p>
+
+        <p>Additionally, while the platform worked seamlessly on desktop, mobile optimisation was a secondary focus at the time. Given the rise of mobile-first engagement, this would be a key area for improvement.</p>
+
+        <h2>Final Thoughts</h2>
+
+        <p>This project reinforced the importance of immersing myself in the user’s world before jumping into solutions. By taking the time to understand live streaming from both the event organiser’s and attendee’s perspectives, I was able to design something that truly solved a problem.</p>
+
+        <p>It also highlighted the power of rapid testing. The smallest insights—like the need for a holding screen—can make the biggest difference when designing for live environments.</p>
+
+        <p>Above all, this case study is a testament to how good design isn’t just about visuals—it’s about solving real problems and driving business success.</p>
+
+
+        <blockquote>
+          <p>Can I just say, that this is the sexiest audience engagement solution for live events? Simon, you're one of the most talented Product Designers I know. Big kudos to someone who puts so much love and passion into their work.</p>
+          <cite>— Carsten Pleiser, CEO at The Event Tech Tribe</cite>
+        </blockquote>
+
+      </div>
+
+      <!-- Author / return-home block -->
+      <a href="index.html" class="group flex items-center gap-4 border-t border-neutral-800 pt-10 mt-2 mb-16">
+        <img src="images/smg-profile.jpeg" alt="Simon Mauro Guido" class="w-12 h-12 rounded-full object-cover bg-neutral-900 shrink-0">
+        <div class="flex-1 min-w-0">
+          <div class="font-medium group-hover:text-[#FFD800] transition-colors">Simon Mauro Guido</div>
+          <div class="text-sm text-neutral-500">Lead Product Designer</div>
+        </div>
+      </a>
+
+      <!-- Footer -->
+      <footer class="border-t border-neutral-800 pt-8 pb-14">
+        <div class="flex flex-wrap items-center justify-between gap-4">
+          <span class="text-sm text-neutral-500">© MMXXVI Simon Mauro Guido</span>
+          <div class="flex gap-4 text-sm text-neutral-400">
+            <a href="https://medium.com/@smgdesign" target="_blank" rel="noopener" class="hover:text-[#FFD800] transition-colors">Medium</a>
+            <a href="https://vimeo.com/smgdesign" target="_blank" rel="noopener" class="hover:text-[#FFD800] transition-colors">Vimeo</a>
+            <a href="https://www.linkedin.com/in/simonmauroguido" target="_blank" rel="noopener" class="hover:text-[#FFD800] transition-colors">LinkedIn</a>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+  </main>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/90 p-6 sm:p-10">
+    <img id="lightbox-img" src="" alt="" class="max-w-full max-h-full object-contain">
+  </div>
+
+  <script src="article.js"></script>
+
+</body>
+</html>
