@@ -1,342 +1,207 @@
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap');
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
-  -webkit-font-smoothing: antialiased;
-}
-
-::selection {
-  background: #FFD800; /* accent */
-  color: #0a0a0a;      /* neutral-950 */
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}
-
+/* Simon Mauro Guido — shared styles (home, articles, kitchen sink) */
 /* ==========================================================================
-   Article content — generic tag styling.
-   This targets bare HTML tags (not utility classes) because article bodies
-   will eventually be rendered from markdown, which produces plain <h2>,
-   <p>, <ul>, <blockquote>, <img> etc. with no classes attached. Scoped to
-   .article-content so it never leaks into the rest of the site.
+   COLOUR TOKENS
+   Layer 1 — primitives: Tailwind CSS palette (hex), plus the one custom colour (--accent).
+   Layer 2 — semantic tokens: the only colours the rest of this file uses.
+   Dark is the default. Light is an easter egg: add ?light to any URL
+   (remembered for the tab; ?dark clears it).
    ========================================================================== */
+:root{
+  /* Primitives */
+  --white:#fff; --black:#000;
+  --neutral-100:#f5f5f5; --neutral-200:#e5e5e5; --neutral-300:#d4d4d4; --neutral-400:#a3a3a3; --neutral-500:#737373;
+  --neutral-600:#525252; --neutral-700:#404040; --neutral-800:#262626; --neutral-900:#171717; --neutral-950:#0a0a0a;
+  --amber-500:#f59e0b; --amber-700:#b45309;
+  --accent:#FFD800; /* brand yellow — the only non-Tailwind colour */
 
-.article-content {
-  font-size: 1.125rem;
-  line-height: 1.75;
-  color: #d4d4d4; /* neutral-300 */
-  padding-top: 0 !important; /* the gap above is always owned by whatever precedes this block — header padding, a featured image's margin, or a callout's own margin — so this must stay zero regardless of what's present or removed */
+  /* Semantic — dark (default) */
+  --bg-primary:var(--neutral-950);
+  --bg-secondary:var(--neutral-900);
+  --text-primary:var(--neutral-100);
+  --text-body:var(--neutral-300);      /* article paragraphs */
+  --text-secondary:var(--neutral-400);
+  --text-tertiary:var(--neutral-500);
+  --border-primary:var(--neutral-800);
+  --border-strong:var(--neutral-600);  /* link underlines at rest */
+  --warning:var(--amber-500);
+  --on-accent:var(--neutral-950);
+  --signature-filter:none;
+  --overlay-bg:color-mix(in srgb,var(--black) 93%,transparent);
+  --overlay-text:var(--neutral-100);
+  --overlay-text-secondary:var(--neutral-400);
+  --scrim:color-mix(in srgb,var(--black) 47%,transparent);
+
+  --serif:'Instrument Serif',Georgia,serif;
+  --sans:-apple-system,BlinkMacSystemFont,'SF Pro Text','Inter','Helvetica Neue',Arial,sans-serif;
+  color-scheme:dark;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
 }
-
-.article-content > *:first-child {
-  margin-top: 0;
+/* Semantic — light */
+:root[data-theme="light"]{
+  --bg-primary:var(--white);
+  --bg-secondary:var(--neutral-100);
+  --text-primary:var(--neutral-900);
+  --text-body:var(--neutral-700);
+  --text-secondary:var(--neutral-600);
+  --text-tertiary:var(--neutral-500);
+  --border-primary:var(--neutral-200);
+  --border-strong:var(--neutral-400);
+  --warning:var(--amber-700);
+  --signature-filter:invert(1);
+  color-scheme:light;
 }
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg-primary);color:var(--text-primary);font:400 17px/1.47 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:clip;transition:background .3s,color .3s}
+::selection{background:var(--accent);color:var(--on-accent)}
+a{color:inherit;text-decoration:none}
+img{display:block}
+.hidden{display:none!important}
+.wrap{max-width:1200px;margin:0 auto;padding:0 clamp(20px,4vw,48px)}
+.small{font-size:13px;color:var(--text-tertiary)}
+/* One link pattern everywhere: quiet at rest, ink + yellow underline on hover */
+.lnk,footer a,footer button,.item h3,.by b,.author b,.body a{text-decoration:underline;text-decoration-color:transparent;text-decoration-thickness:1px;text-underline-offset:4px;transition:color .2s,text-decoration-color .2s}
+.lnk:hover,footer a:hover,footer button:hover,a.item:hover h3,.by:hover b,.author:hover b,.body a:hover{color:var(--text-primary);text-decoration-color:var(--accent)}
+.lnk{color:var(--text-secondary);font-size:15px;display:inline-block;margin-top:14px}
+.sub{margin:14px 0 0;font-size:15px;line-height:1.45;color:var(--text-secondary);max-width:22em}
 
-.article-content p {
-  margin: 0 0 1.5rem;
-}
+/* hero */
+.hero{position:sticky;top:0;min-height:100svh;display:flex;align-items:center;z-index:0}
+.hero-in{width:100%;display:flex;flex-direction:column;align-items:flex-start;padding-block:clamp(56px,10vh,120px);transform-origin:0 50%;will-change:opacity,transform}
+.over{position:relative;z-index:1;background:var(--bg-primary)}
+.sig{display:block;width:min(240px,60%);filter:var(--signature-filter);margin:8px 0 0}
+.hero h1{font:400 clamp(56px,9.8vw,132px)/.93 var(--serif);letter-spacing:-.025em;margin:0}
+.ln{display:block;white-space:nowrap}
+.hero p{font-size:clamp(19px,1.8vw,24px);line-height:1.4;color:var(--text-secondary);margin:clamp(24px,4vh,40px) 0 clamp(28px,5vh,48px);max-width:28em}
+.btns{display:flex;gap:22px;align-items:center;flex-wrap:wrap}
+.btn{background:var(--text-primary);color:var(--bg-primary);font-size:14px;font-weight:500;padding:11px 20px;border-radius:8px;transition:opacity .2s}
+.btn:hover{opacity:.82}
 
-.article-content h2 {
-  font-size: 1.5rem;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  color: #f5f5f5; /* neutral-100 */
-  margin: 3rem 0 1.25rem;
-}
+/* sections: heading column + content column */
+.sec{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:clamp(24px,5vw,72px);padding:64px 0 72px;border-top:1px solid var(--border-primary)}
+.sec h2{font:400 clamp(40px,5vw,60px)/1 var(--serif);letter-spacing:-.015em;margin:0}
+.stick{position:sticky;top:24px}
+.sec.full{grid-template-columns:1fr;gap:32px}
+@media(max-width:820px){.sec{grid-template-columns:1fr;padding:48px 0}.stick{position:static}}
 
-.article-content h3 {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: #f5f5f5;
-  margin: 2.25rem 0 1rem;
-}
+.item{display:flex;gap:24px;padding:22px 0;border-top:1px solid var(--border-primary);align-items:flex-start}
+.item:first-child{border-top:0;padding-top:0}
+.th{width:220px;flex:none;aspect-ratio:4/3;border-radius:6px;overflow:hidden;background:var(--bg-secondary);position:relative}
+.th img{width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+a.item:hover .th img{transform:scale(1.04)}
+.item h3{font:600 21px/1.25 var(--sans);letter-spacing:-.01em;margin:0 0 6px}
+.item p{margin:0 0 10px;color:var(--text-secondary);font-size:16px;max-width:46ch}
+.soon .th::after{content:"Coming Soon";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:600 12px var(--sans);color:var(--overlay-text);background:var(--scrim)}
+@media(max-width:600px){.item{flex-direction:column;gap:14px}.th{width:100%}}
 
-.article-content h4 {
-  font-size: 1.0625rem;
-  font-weight: 600;
-  color: #f5f5f5;
-  margin: 1.75rem 0 0.75rem;
-}
+.xr{display:flex;gap:16px;align-items:center;padding:16px 0;border-top:1px solid var(--border-primary)}
+.xr:first-child{border-top:0;padding-top:0}
+.lg{width:44px;height:44px;border-radius:6px;overflow:hidden;background:var(--bg-secondary);flex:none;border:1px solid var(--border-primary)}
+.lg img{width:100%;height:100%;object-fit:cover}
+.xr b{display:block;font-weight:600;font-size:17px;line-height:1.25;letter-spacing:-.01em}
+.xr .small{display:block;line-height:1.3;margin-top:2px}
+.xr .yr{margin-left:auto;font-size:13px;color:var(--text-secondary);white-space:nowrap}
 
-.article-content strong {
-  color: #f5f5f5;
-  font-weight: 600;
-}
+.shots{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:36px}
+.shot{border:0;padding:0;aspect-ratio:4/3;border-radius:8px;overflow:hidden;background:var(--bg-secondary);cursor:zoom-in}
+.shot img{width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.shot:hover img{transform:scale(1.04)}
+@media(max-width:800px){.shots{grid-template-columns:1fr 1fr}}@media(max-width:640px){.shots{grid-template-columns:1fr}}
 
-.article-content em {
-  font-style: italic;
-}
+.about p{font-size:clamp(17px,1.5vw,19px);line-height:1.6;color:var(--text-secondary);margin:0 0 1.2em;max-width:36em}
+.me-img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:8px;background:var(--bg-secondary)}
 
-.article-content a {
-  color: #f5f5f5;
-  border-bottom: 1px solid #404040; /* neutral-700 */
-  transition: color 0.15s ease, border-color 0.15s ease;
-}
+.rec{display:flex;gap:16px;padding:22px 0;border-top:1px solid var(--border-primary)}
+.rec:first-child{border-top:0;padding-top:0}
+.rec img{width:48px;height:48px;border-radius:50%;object-fit:cover;background:var(--bg-secondary);flex:none}
+.rec p{margin:0 0 10px;font-size:17px;color:var(--text-secondary)}
+.rec b{display:block;font-weight:600;line-height:1.25}
+.rec .small{display:block;line-height:1.3;margin-top:2px}
 
-.article-content a:hover {
-  color: #FFD800;
-  border-color: #FFD800;
-}
+footer{background:var(--bg-secondary);padding:28px 0 40px;margin-top:24px}
+footer{font-size:12px;color:var(--text-secondary)}
+.mem{display:flex;flex-wrap:wrap;gap:6px 24px;padding-bottom:20px;margin-bottom:20px;border-bottom:1px solid var(--border-primary)}
+.mem span:first-child{color:var(--text-primary)}
+.bot{display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between}
+.bot .l{display:flex;gap:18px}
+footer button{font:inherit;background:none;border:0;color:var(--text-secondary);cursor:pointer;padding:0}
 
-.article-content ul,
-.article-content ol {
-  margin: 0 0 1.5rem;
-  padding-left: 1.25rem;
-}
+/* reveal */
+.js .rv{opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+.js .rv.in{opacity:1;transform:none}
 
-.article-content ul {
-  list-style: disc;
-}
+/* ARTICLE — Medium-width (680px), sans body */
+.a{max-width:680px;margin:0 auto;padding:0 20px}
+.a header{padding:clamp(96px,11vw,128px) 0 0}
+.back{position:fixed;top:calc(20px + env(safe-area-inset-top,0px));left:max(20px,env(safe-area-inset-left,0px));z-index:50;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:8px;background:color-mix(in srgb,var(--bg-secondary) 75%,transparent);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--border-primary);color:var(--text-secondary);transition:color .2s}
+.back:hover{color:var(--text-primary);border-color:var(--accent)}
+.end{margin-top:56px;padding-top:32px;border-top:1px solid var(--border-primary)}
+.a h1{font:400 clamp(46px,6.4vw,64px)/1.02 var(--serif);letter-spacing:-.02em;margin:0 0 18px}
+.a .dek{font-size:22px;line-height:1.4;color:var(--text-secondary);margin:0 0 28px;letter-spacing:-.005em}
+.by{display:flex;align-items:center;gap:12px;padding:18px 0;border-bottom:1px solid var(--border-primary);margin-bottom:40px}
+.by img{width:44px;height:44px;border-radius:50%;object-fit:cover;background:var(--bg-secondary)}
+.by b{font-weight:500;font-size:15px;display:block}
+.by span{font-size:14px;color:var(--text-secondary)}
+.body{font-size:20px;line-height:1.6;letter-spacing:-.003em;color:var(--text-body)}
+.body p{margin:0 0 1.45em}
+.body h2{font:400 clamp(30px,4.4vw,38px)/1.12 var(--serif);letter-spacing:-.015em;margin:1.9em 0 .6em}
+.body a{color:var(--text-primary);text-decoration-color:var(--border-strong)}
+.body ul{padding-left:1.2em;margin:0 0 1.6em}.body li{margin-bottom:.7em}
+.body img{width:100%;border-radius:3px;margin:2em 0 .5em;cursor:zoom-in;background:var(--bg-secondary);min-height:0}
+.body figcaption{font-size:14px;color:var(--text-secondary);text-align:center;margin:0 0 2.2em}
+.body blockquote{margin:2em 0;padding-left:23px;border-left:3px solid var(--accent)}
+.body blockquote p{color:var(--text-primary);font:italic 400 26px/1.3 var(--serif);margin:0}
+.body blockquote cite{display:block;font:400 14px var(--sans);font-style:normal;color:var(--text-secondary);margin-top:12px}
 
-.article-content ol {
-  list-style: decimal;
-}
+@media(prefers-reduced-motion:reduce){*{transition-duration:.01ms!important}.js .rv{opacity:1;transform:none}html{scroll-behavior:auto}}
 
-.article-content li {
-  margin-bottom: 0.5rem;
-}
+/* ---- lightbox ---- */
+#lb{position:fixed;inset:0;z-index:100;background:var(--overlay-bg);display:none;align-items:center;justify-content:center;flex-direction:column;padding:clamp(16px,4vw,48px);gap:14px}
+#lb.on{display:flex}
+#lb img{display:block;max-width:100%;max-height:calc(100svh - 130px);width:auto;height:auto;object-fit:contain;border-radius:3px;cursor:zoom-out;background:none;border:0;margin:0}
+#lb .cap{color:var(--overlay-text);font-size:14px;line-height:1.4;text-align:center;min-height:2.6em}
+#lb .cap span{display:block;color:var(--overlay-text-secondary);font-size:12px;margin-top:2px}
+#lb button{position:absolute;background:none;border:0;color:var(--overlay-text);font:300 36px/1 var(--sans);cursor:pointer;padding:14px 18px;opacity:.65;transition:opacity .2s}
+#lb button:hover,#lb button:focus-visible{opacity:1}
+#lb .x{top:max(8px,env(safe-area-inset-top,0px));right:8px}
+#lb .p{left:4px;top:50%;transform:translateY(-50%)}
+#lb .n{right:4px;top:50%;transform:translateY(-50%)}
+#lb.single .p,#lb.single .n{display:none}
 
-.article-content li::marker {
-  color: #d4d4d4; /* neutral-300 — same as body text, not the accent */
-}
+/* ---- section + layout additions ---- */
+.sec.full .sub{max-width:none}
+.about h2{margin:0 0 28px}
+.only-m{display:none;margin-top:22px}
 
-/* Secondary-level (nested) lists — distinct marker so the hierarchy reads clearly */
+/* ---- article components (also used by kitchen-sink.html) ---- */
+.body h2,.body h3,.body h4,.body strong,.body b{color:var(--text-primary)}
+.body h3{font:400 28px/1.15 var(--serif);letter-spacing:-.01em;margin:1.8em 0 .5em}
+.body h4{font:600 17px/1.3 var(--sans);margin:1.6em 0 .5em}
+.body ol{padding-left:1.3em;margin:0 0 1.6em}
+.body li>ul,.body li>ol{margin:.6em 0 0}
+.body li>ul{list-style:circle}
+.body hr{border:0;border-top:1px solid var(--border-primary);margin:2.4em 0}
+.body code{font:.85em ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--bg-secondary);padding:.1em .35em;border-radius:3px}
+.body .image-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:2em 0}
+.body .image-grid figure{margin:0}
+.body .image-grid img{margin:0;aspect-ratio:1/1;object-fit:cover}
+.body .image-grid figcaption{margin:.5em 0 0}
+.body .scroll-gallery{display:flex;gap:12px;overflow-x:auto;width:100vw;margin:2.4em calc(50% - 50vw);padding:0 max(20px,calc((100vw - 640px)/2));scroll-padding:0 max(20px,calc((100vw - 640px)/2));scroll-snap-type:x mandatory;scrollbar-width:thin;scrollbar-color:var(--border-primary) transparent}
+.body .scroll-gallery figure{flex:0 0 auto;width:min(480px,calc(100vw - 80px));margin:0;scroll-snap-align:start}
+.body .scroll-gallery img{margin:0;aspect-ratio:4/3;object-fit:cover}
+.body .scroll-gallery figcaption{margin:.5em 0 0;text-align:left}
+.callout{display:flex;gap:12px;align-items:flex-start;border:1px solid var(--border-primary);background:var(--bg-secondary);border-radius:6px;padding:16px 18px;margin:2em 0;font-size:16px;line-height:1.55;color:var(--text-secondary)}
+.callout svg{flex:none;width:18px;height:18px;margin-top:3px}
+.callout p{margin:0}
+.callout-info svg{color:var(--text-tertiary)}
+.callout-warning svg{color:var(--warning)}
 
-.article-content li > ul,
-.article-content li > ol {
-  margin: 0.5rem 0 0;
-}
+/* ---- small screens ---- */
+@media(max-width:820px){.only-d{display:none!important}.only-m{display:inline-block}.about>div:first-child{order:2}}
+@media(max-width:700px){.sig{width:180px}.hero h1{font-size:16.5vw}}
 
-.article-content li > ul {
-  list-style: circle;
-}
 
-.article-content li > ol {
-  list-style: lower-alpha;
-}
-
-.article-content li > ul > li::marker,
-.article-content li > ol > li::marker {
-  color: #737373; /* neutral-500 — subdued, so the top level still reads as primary */
-}
-
-.article-content blockquote {
-  border-left: 4px solid #FFD800;
-  padding-left: 1.25rem;
-  margin: 2.25rem 0;
-}
-
-.article-content blockquote p {
-  font-size: 1.25rem;
-  color: #f5f5f5;
-  line-height: 1.4;
-  margin-bottom: 0;
-}
-
-.article-content blockquote cite {
-  display: block;
-  font-size: 0.875rem;
-  font-style: normal;
-  color: #737373; /* neutral-500 */
-  margin-top: 0.75rem;
-}
-
-.article-content img {
-  display: block;
-  width: 100%;
-  border: 1px solid #262626; /* neutral-800 */
-  background: #171717; /* neutral-900 */
-  margin: 2.25rem 0 0.5rem;
-  cursor: zoom-in;
-  transition: opacity 0.15s ease;
-}
-
-.article-content img:hover {
-  opacity: 0.9;
-}
-
-.article-content figcaption {
-  font-size: 0.8125rem;
-  color: #737373;
-  text-align: center;
-  margin: 0 0 2.25rem;
-}
-
-/* Optional 2-up image grid — dropped into article markdown as raw HTML when needed */
-
-.article-content .image-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-  margin: 2.25rem 0;
-}
-
-@media (max-width: 640px) {
-  .article-content .image-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-.article-content .image-grid figure {
-  margin: 0;
-}
-
-.article-content .image-grid img {
-  display: block;
-  width: 100%;
-  margin: 0;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
-  cursor: zoom-in;
-}
-
-.article-content .image-grid figcaption {
-  margin: 0.5rem 0 0;
-}
-
-/* Horizontal scroll gallery — Read.cv style. The first image is slightly
-   narrower than the column so the next one visibly peeks in from the right
-   at rest. Center-snap means that once scrolled to any other image, its
-   neighbors on both sides stay partially visible rather than being clipped
-   away — the bleed is continuous in both directions as you scroll. */
-
-.article-content .scroll-gallery {
-  display: flex;
-  gap: 1rem;
-  overflow-x: auto;
-  width: 100vw;
-  /* margin-left/right: calc(50% - 50vw) is the correct way to break a
-     nested element out to full viewport width — it cancels out however
-     far the parent itself is inset from the viewport edge, regardless of
-     nesting depth. The earlier attempt used position:relative + left:50%
-     + transform, but left:50% resolves against the *immediate parent's*
-     width (the narrow 700px column), not the viewport, so it was
-     centering against the wrong reference frame entirely. */
-  margin-top: 3rem;
-  margin-bottom: 3.5rem;
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
-  /* The text column is max-w-[700px] with its own px-6 (1.5rem) inner
-     padding, so the actual text edge sits (100vw - 700px)/2 + 1.5rem from
-     the screen edge — not just (100vw - 700px)/2, which only reaches the
-     700px box's outer edge, one px-6 short of where body copy actually
-     starts. The max(1.5rem, ...) floor covers the case where the column
-     IS the viewport (narrow screens), where px-6 alone determines the
-     inset. Right side matches so the natural scroll-end lands the last
-     image flush with the column's right edge, mirroring the start. */
-  padding-left: max(1.5rem, calc((100vw - 700px) / 2 + 1.5rem));
-  padding-right: max(1.5rem, calc((100vw - 700px) / 2 + 1.5rem));
-  /* scroll-snap-type does NOT respect a scroll container's own padding by
-     default — scroll-padding is a separate property that defaults to 0
-     regardless of padding. Without it matching here, mandatory snap
-     auto-scrolls past the left padding on load to satisfy the snap
-     constraint, silently cancelling out the alignment above. Verified
-     against a real Chromium render — this was the actual bug. */
-  scroll-padding-left: max(1.5rem, calc((100vw - 700px) / 2 + 1.5rem));
-  scroll-padding-right: max(1.5rem, calc((100vw - 700px) / 2 + 1.5rem));
-  scroll-snap-type: x mandatory;
-  scrollbar-width: thin;
-  scrollbar-color: #404040 transparent;
-}
-
-.article-content .scroll-gallery::-webkit-scrollbar {
-  height: 6px;
-}
-
-.article-content .scroll-gallery::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.article-content .scroll-gallery::-webkit-scrollbar-thumb {
-  background: #404040;
-  border-radius: 3px;
-}
-
-.article-content .scroll-gallery figure {
-  flex: 0 0 auto;
-  width: min(560px, calc(100vw - 6rem));
-  margin: 0;
-  scroll-snap-align: start;
-}
-
-.article-content .scroll-gallery img {
-  display: block;
-  width: 100%;
-  margin: 0;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
-}
-
-.article-content .scroll-gallery figcaption {
-  margin: 0.5rem 0 0;
-}
-
-/* Featured/cover image — wider than the text column, zoomable like body images */
-
-.featured-image img {
-  cursor: zoom-in;
-  transition: opacity 0.15s ease;
-}
-
-.featured-image img:hover {
-  opacity: 0.9;
-}
-
-/* Lightbox */
-
-#lightbox img {
-  cursor: zoom-out;
-}
-
-/* ==========================================================================
-   Callout — reusable notice component (info, warning, etc.)
-   Icon on the left, text on the right. Works standalone in hand-built page
-   chrome (like the gap between a featured image and the article body) or
-   dropped as raw HTML inside .article-content markdown.
-   ========================================================================== */
-
-.callout {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.75rem;
-  border: 1px solid #262626; /* neutral-800 */
-  background: #171717; /* neutral-900 */
-  padding: 1rem 1.25rem;
-  margin: 3rem 0;
-}
-
-.callout-icon {
-  width: 1.125rem;
-  height: 1.125rem;
-  flex-shrink: 0;
-  margin-top: 0.125rem;
-}
-
-.callout p {
-  font-size: 0.875rem;
-  line-height: 1.6;
-  color: #a3a3a3; /* neutral-400 */
-  margin: 0;
-}
-
-/* Info: subtle neutral icon, not the accent color */
-.callout-info .callout-icon {
-  color: #737373; /* neutral-500 */
-}
-
-/* Warning: muted amber, still restrained — distinct from the accent yellow */
-.callout-warning .callout-icon {
-  color: #b45309;
-}
+/* ---- secondary button (same treatment as the article back icon) ---- */
+.btn-2{display:inline-flex;align-items:center;gap:10px;font-size:14px;font-weight:500;padding:11px 18px;border-radius:8px;background:color-mix(in srgb,var(--bg-secondary) 75%,transparent);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--border-primary);color:var(--text-secondary);transition:color .2s,border-color .2s}
+.btn-2:hover{color:var(--text-primary);border-color:var(--accent)}
+.end{padding-bottom:96px}

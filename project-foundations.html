@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-SGGXNHR2MG"></script>
@@ -11,7 +11,7 @@
   gtag('config', 'G-SGGXNHR2MG');
 </script>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Designing motivation into online learning — Simon Mauro Guido</title>
 <meta name="description" content="Applying behavioural psychology to make SANS Foundations — a demanding cybersecurity course built by Magnetic Rock — feel manageable for learners.">
 <link rel="canonical" href="https://smg.design/project-foundations.html">
@@ -27,44 +27,27 @@
 <meta name="twitter:title" content="Designing motivation into online learning — Simon Mauro Guido">
 <meta name="twitter:description" content="Applying behavioural psychology to make SANS Foundations — a demanding cybersecurity course built by Magnetic Rock — feel manageable for learners.">
 <meta name="twitter:image" content="https://smg.design/images/opengraph.png">
-<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<meta name="theme-color" content="#0a0a0a">
+<script>(function(){var d=document.documentElement;d.classList.add('js');try{var q=location.search;if(/[?&]light\b/.test(q))sessionStorage.setItem('smg-theme','light');else if(/[?&]dark\b/.test(q))sessionStorage.removeItem('smg-theme');if(sessionStorage.getItem('smg-theme')==='light')d.setAttribute('data-theme','light')}catch(e){if(/[?&]light\b/.test(location.search))d.setAttribute('data-theme','light')}})()</script>
 <link rel="stylesheet" href="styles.css">
 </head>
-<body class="bg-neutral-950 text-neutral-100">
-
-  <!-- Sticky back button -->
-  <a href="index.html" aria-label="Back to Simon Mauro Guido" class="fixed top-5 left-5 sm:top-6 sm:left-6 z-50 flex items-center justify-center w-10 h-10 rounded-[3px] bg-neutral-900/80 backdrop-blur border border-neutral-800 text-neutral-300 hover:text-[#FFD800] hover:border-neutral-700 transition-colors">
-    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19 5 12l7-7"/></svg>
-  </a>
-
-  <main>
-
-    <!-- Header: title, dek, meta bar (no byline — that's moved to the bottom) -->
-    <div class="max-w-[700px] mx-auto px-6">
-      <header class="pt-20 sm:pt-24 mb-12">
-        <h1 class="text-[32px] sm:text-[40px] font-semibold tracking-tight leading-[1.15] mb-5">Designing motivation into online learning</h1>
-        <p class="text-lg text-neutral-400 leading-relaxed mb-6">Applying behavioural psychology to make a demanding course feel manageable.</p>
-        <div class="flex flex-wrap items-center gap-x-3.5 gap-y-1 text-sm text-neutral-400 border-y border-neutral-800 py-3">
-          <span>Project</span>
-          <span class="text-neutral-700 text-base leading-none">•</span>
-          <span>Magnetic Rock</span>
-          <span class="text-neutral-700 text-base leading-none">•</span>
-          <span>2024</span>
-          <span class="text-neutral-700 text-base leading-none">•</span>
-          <span>8 min read</span>
-        </div>
-      </header>
-    </div>
-
-    <!-- Article body -->
-    <div class="max-w-[700px] mx-auto px-6">
-      <div class="article-content pb-4">
-
-    <p><a href="https://sans-foundations.com" target="_blank" rel="nofollow">SANS Foundations</a> is an entry-level cybersecurity course and custom learning platform created by <a href="https://www.linkedin.com/company/magnetic-rock" target="_blank" rel="nofollow">Magnetic Rock</a> in partnership with <a href="https://www.sans.org" target="_blank" rel="nofollow">SANS</a> — one of the world’s leading cybersecurity research and training organisations.</p>
+<body>
+<a class="back" href="index.html" aria-label="Back to homepage"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="M12 19 5 12l7-7"/></svg></a>
+<main class="a">
+  <header>
+    <h1>Designing motivation into online learning</h1>
+    <p class="dek">Applying behavioural psychology to make a demanding course feel manageable.</p>
+    <a class="by" href="index.html"><img src="images/smg-profile.jpeg" alt=""><div><b>Simon Mauro Guido</b><span>Magnetic Rock · 2024 · 8 min read</span></div></a>
+  </header>
+  <article class="body">
+<p><a href="https://sans-foundations.com" target="_blank" rel="nofollow">SANS Foundations</a> is an entry-level cybersecurity course and custom learning platform created by <a href="https://www.linkedin.com/company/magnetic-rock" target="_blank" rel="nofollow">Magnetic Rock</a> in partnership with <a href="https://www.sans.org" target="_blank" rel="nofollow">SANS</a> — one of the world’s leading cybersecurity research and training organisations.</p>
 
     <p>As Lead Product Designer, I owned the UX and product design direction of the platform, working with a cross-functional team of product managers, engineers, UX researchers, data scientists and illustrators.</p>
 
-    <img src="images/project-foundations-mrteam.jpg" alt="The Magnetic Rock team, 2022" loading="lazy">
+    <img data-zoom src="images/project-foundations-mrteam.jpg" alt="The Magnetic Rock team, 2022" loading="lazy">
     <figcaption>The Magnetic Rock team, 2022</figcaption>
 
     <h2>"The course is too long"</h2>
@@ -85,7 +68,7 @@
 
     <p><a href="https://www.goodreads.com/en/book/show/13127519-design-for-how-people-learn" target="_blank">Design for How People Learn by Julie Dirksen</a> was particularly influential in how I thought about cognitive load, chunking and orientation. <a href="https://yukaichou.com/gamification-examples/octalysis-gamification-framework/" target="_blank"> Yu-kai Chou’s Octalysis Framework</a> provided another useful lens for understanding motivation through concepts such as accomplishment, feedback, autonomy and progress.</p>
 
-    <img src="images/project-foundations-octalysisframework.png" alt="Complete Octalysis Framework octagon showing all 8 Core Drives — Yu-kai Chou" loading="lazy">
+    <img data-zoom src="images/project-foundations-octalysisframework.png" alt="Complete Octalysis Framework octagon showing all 8 Core Drives — Yu-kai Chou" loading="lazy">
     <figcaption>Complete Octalysis Framework octagon showing all 8 Core Drives — Yu-kai Chou</figcaption>
 
     <p>I worked closely with our <a href="https://www.linkedin.com/in/mcshefferty/" target="_blank">UX Researcher</a> and <a href="https://www.linkedin.com/in/oliver-waddup-phd-3aa82a238/" target="_blank">Data Scientist</a> throughout the process, using learner research, behavioural data and feedback to challenge my assumptions.</p>
@@ -108,7 +91,7 @@
       <li><strong>Pre-module assessment</strong> — explored as a way of shortening the course by allowing students to skip parts they already seemed proficient in, but risked learners skipping sections the assessment hadn't properly covered.</li>
     </ul>
 
-    <img src="images/project-foundations-premodassessment.png" alt="Pre-module assessment wireframes" loading="lazy">
+    <img data-zoom src="images/project-foundations-premodassessment.png" alt="Pre-module assessment wireframes" loading="lazy">
     <figcaption>Exploring how a pre-module assessment could work</figcaption>
 
     <p>The principle became: <strong>if a mechanic didn't make learning itself more meaningful, it didn't belong</strong>. This shifted the focus away from gamification as a feature set and towards motivation, progress, feedback and cognitive load.</p>
@@ -137,7 +120,7 @@
     
     <p>I restructured the 90+ sections into 12 clearly defined modules, creating a stronger hierarchy between section, module and course.</p>
 
-    <img src="images/project-foundations-concept.png" alt="Early wireframes of the module landing page" loading="lazy">
+    <img data-zoom src="images/project-foundations-concept.png" alt="Early wireframes of the module landing page" loading="lazy">
     <figcaption>An early concept of the new module landing page idea</figcaption>
 
     <p>Each module became a small learning journey (or 'mini course') in its own right. A new module landing page introduced the subject with a short video from the course author — James, which explained what learners were about to cover, showed their progress, and gave them a clear sense of what completing that module meant.</p>
@@ -146,7 +129,7 @@
 
     <p>Rather than allowing learners to move endlessly from one section into another, the module landing page created a natural pause — a moment to come up for air before starting the next part of the course. The course hadn't become any shorter. But psychologically, the unit of progress had changed.</p>
 
-    <img src="images/project-foundations-wireframes.png" alt="Dashboard redesign and the module landing page" loading="lazy">
+    <img data-zoom src="images/project-foundations-wireframes.png" alt="Dashboard redesign and the module landing page" loading="lazy">
     <figcaption>The dashboard redesign, and the new module landing page</figcaption>
 
     <p>Instead of constantly seeing dozens of sections still ahead, learners could see a finite number of modules, each with a clear beginning and end.</p>
@@ -180,7 +163,7 @@
         <li>The different navigation options weren't behaving as users expected</li>
       </ul>
 
-    <img src="images/project-foundations-testing.png" alt="User testing feedback of the module landing page" loading="lazy">
+    <img data-zoom src="images/project-foundations-testing.png" alt="User testing feedback of the module landing page" loading="lazy">
     <figcaption>User testing of the new flow, the module landing page, and experimenting with different ways of visualising progress</figcaption>
 
     <p>The feedback also helped shape how progress was communicated. “Underway” was replaced with a concrete completion state — “6 of 10 sections completed” — while an experimental progress treatment was dropped when conventional progress bars proved clearer and less visually distracting.</p>
@@ -197,10 +180,10 @@
 
     <p>We also saw an <strong>~8% increase in overall course completion</strong>, alongside a reduction in early-course drop-off.</p>
 
-    <img src="images/project-foundations-dashboard.png" alt="The redesigned course dashboard, showing progress across modules" loading="lazy">
+    <img data-zoom src="images/project-foundations-dashboard.png" alt="The redesigned course dashboard, showing progress across modules" loading="lazy">
     <figcaption>The redesigned course dashboard</figcaption>
 
-    <img src="images/project-foundations-module.png" alt="The redesigned module view" loading="lazy">
+    <img data-zoom src="images/project-foundations-module.png" alt="The redesigned module view" loading="lazy">
     <figcaption>The new module landing page</figcaption>
 
     <p>Other behavioural measures showed learners returning more consistently and progressing further through the course before stopping.</p>
@@ -220,40 +203,16 @@
     <p>The project also changed how I think about friction. We often treat every additional click as something to eliminate. But sometimes friction provides structure. A pause can create orientation. A boundary can make progress visible. A small interruption can make a long journey easier to sustain.</p>
 
     <p>The course didn't need another reward system. It needed a better understanding of what makes people feel like they are getting somewhere.</p>
+  </article>
+  <div class="end"><a class="btn-2" href="index.html"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="M12 19 5 12l7-7"/></svg>Back to homepage</a></div>
+</main>
 
-  </div>
-
-
-      <!-- Author / return-home block -->
-      <a href="index.html" class="group flex items-center gap-4 border-t border-neutral-800 pt-10 mt-2 mb-16">
-        <img src="images/smg-profile.jpeg" alt="Simon Mauro Guido" class="w-12 h-12 rounded-full object-cover bg-neutral-900 shrink-0">
-        <div class="flex-1 min-w-0">
-          <div class="font-medium group-hover:text-[#FFD800] transition-colors">Simon Mauro Guido</div>
-          <div class="text-sm text-neutral-500">Lead Product Designer</div>
-        </div>
-      </a>
-
-      <!-- Footer -->
-      <footer class="border-t border-neutral-800 pt-8 pb-14">
-        <div class="flex flex-wrap items-center justify-between gap-4">
-          <span class="text-sm text-neutral-500">© MMXXVI Simon Mauro Guido</span>
-          <div class="flex gap-4 text-sm text-neutral-400">
-            <a href="https://medium.com/@smgdesign" target="_blank" rel="noopener" class="hover:text-[#FFD800] transition-colors">Medium</a>
-            <a href="https://vimeo.com/smgdesign" target="_blank" rel="noopener" class="hover:text-[#FFD800] transition-colors">Vimeo</a>
-            <a href="https://www.linkedin.com/in/simonmauroguido" target="_blank" rel="noopener" class="hover:text-[#FFD800] transition-colors">LinkedIn</a>
-          </div>
-        </div>
-      </footer>
-    </div>
-
-  </main>
-
-  <!-- Lightbox -->
-  <div id="lightbox" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/90 p-6 sm:p-10">
-    <img id="lightbox-img" src="" alt="" class="max-w-full max-h-full object-contain">
-  </div>
-
-  <script src="article.js"></script>
-
+<footer><div class="wrap">
+  <!-- "Member of" row hidden for now — restore when ready:
+  <div class="mem"><span>Member of</span><span>…</span></div> -->
+  <div class="bot"><span>© MMXXVI Simon Mauro Guido</span>
+    <div class="l"><a href="https://medium.com/@smgdesign" target="_blank" rel="noopener">Medium</a><a href="https://vimeo.com/smgdesign" target="_blank" rel="noopener">Vimeo</a><a href="https://www.linkedin.com/in/simonmauroguido" target="_blank" rel="noopener">LinkedIn</a></div></div>
+</div></footer>
+<script src="site.js"></script>
 </body>
 </html>
