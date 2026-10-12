@@ -27,7 +27,7 @@
     <meta property="og:title" content="Simon Mauro Guido — Considered, ethical design" />
     <meta
       property="og:description"
-      content="SSimon Mauro Guido — Considered, ethical design"
+      content="Simon Mauro Guido — Considered, ethical design"
     />
     <meta property="og:url" content="https://smg.design/" />
     <meta property="og:image" content="https://smg.design/images/opengraph.png" />
@@ -35,7 +35,7 @@
     <meta name="twitter:title" content="Simon Mauro Guido — Considered, ethical design" />
     <meta
       name="twitter:description"
-      content="Simon Mauro Guido — Considered, ethical design
+      content="Simon Mauro Guido — Considered, ethical design"
     />
     <meta name="twitter:image" content="https://smg.design/images/opengraph.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -60,6 +60,26 @@
       })();
     </script>
     <link rel="stylesheet" href="styles.css" />
+    <style>
+      /* ---- Hero additions (feedback round) — fold into styles.css when happy ---- */
+      :root { --accent-y: #ffd43b; }
+
+      /* "ethical" in accent yellow */
+      .hero h1 .mark { color: var(--accent-y); }
+
+      /* Primary -> secondary (outline) */
+      .btn.btn-outline {
+        background: transparent;
+        color: inherit;
+        border: 1px solid color-mix(in srgb, currentColor 35%, transparent);
+        box-shadow: none;
+      }
+      .btn.btn-outline:hover,
+      .btn.btn-outline:focus-visible {
+        background: color-mix(in srgb, currentColor 8%, transparent);
+        border-color: var(--accent-y);
+      }
+    </style>
   </head>
   <body>
     <!-- Icon sprite. Use anywhere with: <svg class="ico" aria-hidden="true"><use href="#i-ext" /></svg> -->
@@ -75,14 +95,14 @@
         <div class="wrap hero-in">
           <h1>
             <span class="ln">Considered,</span>
-            <span class="ln">ethical design</span>
+            <span class="ln"><span class="mark">ethical</span> design</span>
           </h1>
           <p>
             Simon Mauro Guido — Lead Product Designer at SANS and featured writer for UX Collective.
             Interested in thoughtful, ethical design and the consequences of the things we build.
           </p>
           <div class="btns">
-            <a class="btn" href="mailto:ciao@smg.design">Contact Me</a>
+            <a class="btn btn-outline" href="mailto:ciao@smg.design">Contact Me</a>
             <a
               class="lnk"
               style="margin: 0"
